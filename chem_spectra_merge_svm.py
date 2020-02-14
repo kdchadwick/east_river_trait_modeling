@@ -20,7 +20,6 @@ warnings.filterwarnings('ignore')
 import argparse
 import subprocess
 
-from sklearn.svm import SVC, SVR
 from sklearn.preprocessing import StandardScaler
 from scipy.signal import savgol_filter
 import pickle
@@ -243,6 +242,7 @@ aggregated_df_export.to_csv(output_df_set_files[0], index=False, sep=',')
 conifers_df_export.to_csv(output_df_set_files[1], index=False, sep=',')
 noneedles_df_export.to_csv(output_df_set_files[2], index=False, sep=',')
 
+# Plot the difference between needles and noneedles in reflectance data
 figure_base_dir = os.path.join(args.output_directory,'figures')
 subprocess.call('mkdir ' + figure_base_dir, shell=True)
 figure_export_settings = {'dpi': 200, 'bbox_inches': 'tight'}
@@ -266,80 +266,8 @@ del fig
 
 
 
-###########  Now set up and run SVM to discrimitate conifers
-all_spectra = np.vstack([x for x in spectra_sets])
-all_crowns = np.vstack([x.reshape(-1,1) for x in crown_sets]).flatten()
 
-is_conifer = np.zeros(all_spectra.shape[0]).astype(bool)
-is_conifer[:conifer_spectra.shape[0]] = True
-
-all_spectra = all_spectra[:,np.all(np.isnan(all_spectra) == False, axis=0)]
-
-un_crowns = np.unique(all_crowns)
-
-train_crowns = un_crowns[np.random.permutation(len(un_crowns))[:int(len(un_crowns)*0.9)]]
-train = np.zeros(all_spectra.shape[0]).astype(bool)
-for _c in range(len(train_crowns)):
-  train[all_crowns == train_crowns[_c]] = True
-
-#scaler = StandardScaler()
-#scaler.fit(all_spectra[train,:])
-#all_spectra = scaler.transform(all_spectra)
-
-model = SVC(gamma='auto',kernel='poly',degree=3,probability=True)
-model.fit(all_spectra[train,:], is_conifer.astype(int)[train])
-
-subset = np.logical_not(train)
-spectral_sep = model.predict(all_spectra).astype(bool)
-
-logging.info('Reflectance Model...BN used: '.format(args.brightness_normalize))
-logging.info('Correct conifers: {}'.format(np.sum(np.logical_and(is_conifer[subset], spectral_sep[subset])/np.sum(is_conifer[subset]))))
-logging.info('Falsely IDd conifers: {}'.format(np.sum(np.logical_and(np.logical_not(is_conifer[subset]), spectral_sep[subset]))/np.sum(np.sum(is_conifer[subset]))))
-logging.info('Missed Conifers: {}'.format(np.sum(np.logical_and(is_conifer[subset], np.logical_not(spectral_sep[subset]))/np.sum(is_conifer[subset]))))
-
-fig = plt.figure(figsize=(10,4), constrained_layout=True)
-ax = fig.add_axes([0,0,.55,.9])
-for _s in range(len(spectra_sets)):
-    spectra = spectra_sets[_s]
-    plt.plot(wv,np.nanmean(spectra,axis=0), c=color_sets[_s], linewidth = 3)
-    plt.fill_between(wv,np.nanmean(spectra,axis=0) - np.nanstd(spectra,axis=0),np.nanmean(spectra,axis=0) + np.nanstd(spectra,axis=0), alpha=.35, facecolor=color_sets[_s])
-    
-plt.legend(['Needle', 'Non-Needle'])
-plt.xlabel('Wavelength (nm)')
-if args.brightness_normalize:
-    plt.ylabel('Brightness Norm. Reflectance')
-else:
-    plt.ylabel('Reflectance (%)')
-
-ax = fig.add_axes([0.73,0,.3,.9])
-probabilities = model.predict_proba(all_spectra[subset])
-plt.hist((1-probabilities[is_conifer[subset]==True,0]), facecolor='royalblue', alpha=0.5, range=(0,1), bins=15)
-plt.hist((1-probabilities[is_conifer[subset]==False,0]), facecolor='darkorange', alpha=0.5, range=(0,1), bins=15)
-plt.ylabel('Pixel Count')
-plt.xlabel('Conifer Probability')
-plt.savefig(os.path.join(figure_base_dir,'svm_performance.png'), **figure_export_settings)
-del fig
-
-model_base_dir = os.path.join(args.output_directory,'models')
-subprocess.call('mkdir ' + model_base_dir, shell=True)
-
-model.fit(all_spectra, is_conifer.astype(int))
-pickle.dump(model,open(os.path.join(model_base_dir,'svm_model_alldata'),'wb'))
-
-
-
-#X = full[headerSpec].values.astype(float)
-#y = full['N_weight_percent'].values.astype(float).reshape(-1,1)
-#
-#sc_x = StandardScaler()
-#sc_y = StandardScaler()
-#X = sc_x.fit_transform(X)
-#y = sc_y.fit_transform(y)
-#
-#regressor = SVR(kernel = 'rbf')
-#regressor.fit(X,y)
-
-
+# Run through and generate the PLSR settings files, and call the PLSR code
 starting_dir = os.getcwd()
 output_df_set_files.pop(1)
 output_df_set_files.pop(1)
