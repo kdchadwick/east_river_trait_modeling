@@ -35,7 +35,7 @@ parser.add_argument('-wavelength_file',default='data/neon_wavelengths.txt')
 parser.add_argument('-shade_type', type=str, choices=['dsm','tch','both','none'], default=None)
 #parser.add_argument('-product', nargs='+', required=True, choices=['combined_csv', 'conifer', 'traits', 'all'])
 parser.add_argument('-chem_file',default='data/site_trait_data.csv')
-parser.add_argument('-spectra_file',default='data/extraction_output_centroid_extended.csv')
+parser.add_argument('-spectra_file',default='data/20200214_CRBU2018_AOP_Crowns_extraction.csv')
 parser.add_argument('-bn','--brightness_normalize', type=str, default='True')
 parser.add_argument('-spectral_smoothing', choices=['sg','none','2band','3band'], type=str, default='none')
 parser.add_argument('-n_test_folds', default=10, type=int)
@@ -240,8 +240,12 @@ figure_export_settings = {'dpi': 200, 'bbox_inches': 'tight'}
 fig = plt.figure(figsize=(8,5), constrained_layout=True)
 for _s in range(len(spectra_sets)):
     spectra = spectra_sets[_s]
-    plt.plot(wv, np.nanmean(spectra, axis=0) / 100, c=color_sets[_s], linewidth = 2)
-    plt.fill_between(wv, np.nanmean(spectra, axis=0) / 100 - np.nanstd(spectra, axis=0) / 100, np.nanmean(spectra, axis=0) / 100 + np.nanstd(spectra, axis=0) / 100, alpha=.35, facecolor=color_sets[_s])
+    if (args.brightness_normalize):
+        scale_factor = 1.
+    else:
+        scale_factor = 100.
+    plt.plot(wv, np.nanmean(spectra, axis=0) / scale_factor, c=color_sets[_s], linewidth = 2)
+    plt.fill_between(wv, np.nanmean(spectra, axis=0) / scale_factor - np.nanstd(spectra, axis=0) / scale_factor, np.nanmean(spectra, axis=0) / scale_factor + np.nanstd(spectra, axis=0) / scale_factor, alpha=.35, facecolor=color_sets[_s])
     
 plt.legend(['Needle', 'Non-Needle'])
 plt.ylabel('Reflectance (%)')
@@ -259,8 +263,8 @@ del fig
 
 # Run through and generate the PLSR settings files, and call the PLSR code
 starting_dir = os.getcwd()
-output_df_set_files.pop(1)
-output_df_set_files.pop(1)
+#output_df_set_files.pop(1)
+#output_df_set_files.pop(1)
 for output_df_set in output_df_set_files:
 
     chem_output_dir = os.path.splitext(os.path.basename(output_df_set))[0]
@@ -298,7 +302,7 @@ for output_df_set in output_df_set_files:
             settings_file.settings_obj.write(configfile)
 
         os.chdir(fold_output_dir)
-        cmd_str = 'python {} {}'.format(os.path.join(args.plsr_ensemble_code_dir,'ensemble_plsr.py'),output_sf)
+        cmd_str = 'python {} {}&'.format(os.path.join(args.plsr_ensemble_code_dir,'ensemble_plsr.py'),output_sf)
         logging.info('calling:\n{}'.format(cmd_str))
-        #subprocess.call(cmd_str,shell=True)
+        subprocess.call(cmd_str,shell=True)
         os.chdir(starting_dir)
