@@ -74,13 +74,14 @@ for f in range(args.folds):
         high_val = ((max(max(chems_results.loc[(chems_results['chems'] == i), "measured"]), max(chems_results.loc[(chems_results['chems'] == i), "modeled"]))))
         low_val = ((min(min(chems_results.loc[ (chems_results['chems'] == i), "measured"]), min(chems_results.loc[ (chems_results['chems'] == i), "modeled"]))))
 
+        nrmse = np.sqrt(np.mean(np.power(y-x,2)))/(high_val-low_val)
+
         high_val += (high_val-low_val)*.05
         low_val -= (high_val-low_val)*.05
         ticks = np.round(np.linspace(low_val,high_val,4),round_val[_i])
         high_val = ticks[-1]
         low_val = ticks[0]
 
-        nrmse = np.sqrt(np.mean(np.power(y-x,2)))/(high_val-low_val)
 
         ax = plt.subplot(grid[r_i[_i], c_i[_i]])
         ax.plot([low_val, high_val], [low_val, high_val], '--k', alpha=0.5)
