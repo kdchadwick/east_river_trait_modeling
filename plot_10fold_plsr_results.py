@@ -38,19 +38,6 @@ leaftype = ['needles','noneedles']
 plotting_colnames = ['SiteID', 'measured', 'modeled', 'calval']
 
 
-# loop through adding each file and column with the chem name 
-
-
-for f in range(args.folds):
-    chems_results = [pd.DataFrame(columns=['SiteID', 'measured', 'modeled', 'calval', 'chems', 'leaftype'])]
-    for n in leaftype:
-        for c in chems:
-            temp = pd.read_csv(os.path.join(args.results_directory, n, 'fold_' + str(f), 'plot_points', args.file_prefix + "_"+n+"_"+'fold_' + str(f) + '_' + c + ".csv"))
-            temp.columns = plotting_colnames
-            temp['chems'] = c
-            temp['leaftype'] = n
-            chems_results.append(temp)
-    chems_results = pd.concat(chems_results)
 
 fig = plt.figure(figsize=(19, 13))  # , constrained_layout=True)
 grid = gridspec.GridSpec(2, 3, wspace=.3, hspace=.5)
@@ -58,6 +45,22 @@ grid = gridspec.GridSpec(2, 3, wspace=.3, hspace=.5)
 r_i = [0, 0, 0, 1, 1, 1]
 c_i = [0, 1, 2, 0, 1, 2]
 for _i in range(len(chems)):
+
+    # get results for this chem 
+    chems_results = [pd.DataFrame(columns=['SiteID', 'measured', 'modeled', 'calval', 'chems', 'leaftype'])]
+    for f in range(args.folds):
+        for n in leaftype:
+            temp = pd.read_csv(os.path.join(args.results_directory, n, 'fold_' + str(f), 'plot_points', args.file_prefix + "_"+n+"_"+'fold_' + str(f) + '_' + chems[_i] + ".csv"))
+            temp.columns = plotting_colnames
+            temp['chems'] = chems[_i]
+            temp['leaftype'] = n
+            chems_results.append(temp)
+    chems_results = pd.concat(chems_results)
+
+
+
+
+
     i = chems[_i]
     i_title = chems_names[_i]
 
