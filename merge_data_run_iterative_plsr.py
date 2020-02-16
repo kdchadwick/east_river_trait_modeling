@@ -54,7 +54,7 @@ else:
 assert args.n_folds_to_run <= args.n_test_folds, 'n_folds_to_run <= n_test_folds'
 
 
-assert os.path.isdir(args.output_directory) is False, 'output directory already exists'
+#assert os.path.isdir(args.output_directory) is False, 'output directory already exists'
 subprocess.call('mkdir ' + os.path.join(args.output_directory), shell=True)
 
 logging.basicConfig(filename=os.path.join(args.output_directory,'log_file.txt'), level='INFO')
