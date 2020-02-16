@@ -16,7 +16,7 @@ warnings.filterwarnings('ignore')
 plt.rcParams.update({'font.size': 20})
 plt.rcParams['font.family']= "serif"
 plt.rcParams['font.serif']= "Times New Roman"
-plt.rcParams['axes.grid']=True
+plt.rcParams['axes.grid']=False
 plt.rcParams['axes.axisbelow']=True
 plt.rcParams['axes.labelpad']=6
 figure_export_settings = {'dpi': 200, 'bbox_inches': 'tight'}
@@ -44,6 +44,7 @@ grid = gridspec.GridSpec(2, 3, wspace=.3, hspace=.5)
 
 r_i = [0, 0, 0, 1, 1, 1]
 c_i = [0, 1, 2, 0, 1, 2]
+round_val = [1,-1,0,0,0,0]
 for _i in range(len(chems)):
 
     # get results for this chem 
@@ -76,6 +77,14 @@ for _i in range(len(chems)):
 
     high_val = ((max(max(chems_results.loc[(chems_results['chems'] == i), "measured"]), max(chems_results.loc[(chems_results['chems'] == i), "modeled"]))))
     low_val = ((min(min(chems_results.loc[ (chems_results['chems'] == i), "measured"]), min(chems_results.loc[ (chems_results['chems'] == i), "modeled"]))))
+
+
+    high_val += (high_val-low_val)*.05
+    low_val -= (high_val-low_val)*.05
+    ticks = np.round(np.linspace(low_val,high_val,4),round_val[_i])
+    high_val = ticks[-1]
+    low_val = ticks[0]
+
     nrmse = np.sqrt(np.mean(np.power(y-x,2)))/(high_val-low_val)
 
     ax = plt.subplot(grid[r_i[_i], c_i[_i]])
@@ -85,9 +94,12 @@ for _i in range(len(chems)):
     ax.scatter(chems_results.loc[(chems_results['calval'] == "Validation") & (chems_results['chems'] == i) & (chems_results['leaftype'] == 'noneedles'), "measured"], chems_results.loc[(chems_results['calval'] == "Validation") & (chems_results['chems'] == i) & (chems_results['leaftype'] == 'noneedles'), "modeled"], color="darkorange", marker='o')
     ax.scatter(chems_results.loc[(chems_results['calval'] == "Validation") & (chems_results['chems'] == i) & (chems_results['leaftype'] == 'needles'), "measured"], chems_results.loc[(chems_results['calval'] == "Validation") & (chems_results['chems'] == i) & (chems_results['leaftype'] == 'needles'), "modeled"], color="royalblue", marker='o')
     
-    ax.set(xlim=[low_val, high_val], ylim=[low_val, high_val], title=i_title, xlabel='Measured', ylabel='Modeled')
-    ax.text(low_val, high_val, 'R2: ' + round(r_sq, 2).astype('str') + '   nRMSE: '+ round(nrmse, 2).astype('str'), horizontalalignment='left', verticalalignment='top')
 
+    ax.set_xticks(ticks)
+    ax.set_yticks(ticks)
+    ax.set(xlim=[low_val, high_val], ylim=[low_val, high_val], title=i_title, xlabel='Measured', ylabel='Modeled')
+
+    ax.text(low_val + (high_val-low_val)*0.02, low_val + (high_val-low_val)*0.98, 'R$^2$: ' + round(r_sq, 2).astype('str') + '   nRMSE: '+ round(nrmse, 2).astype('str'), horizontalalignment='left', verticalalignment='top')
 plt.savefig(os.path.join(os.path.join(args.results_directory, args.file_prefix + '_allfolds_model_results.png')), **figure_export_settings)
 del fig
 
