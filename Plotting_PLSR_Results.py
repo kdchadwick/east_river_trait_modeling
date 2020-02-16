@@ -25,8 +25,9 @@ figure_export_settings = {'dpi': 200, 'bbox_inches': 'tight'}
 # In[3]:
 
 parser = argparse.ArgumentParser('Plot results from specific east-river trait submodels')
-parser.add_argument('-folds', type=str, default=1)
+parser.add_argument('-folds',type=int, default=1)#type=str
 parser.add_argument('-results_directory', default='PLSR_dsm_sg_True')
+parser.add_argument('-file_prefix', default ='PLSR')
 
 args = parser.parse_args()
 
@@ -44,7 +45,7 @@ for f in range(args.folds):
     chems_results = [pd.DataFrame(columns=['SiteID', 'measured', 'modeled', 'calval', 'chems', 'leaftype'])]
     for n in leaftype:
         for c in chems:
-            temp = pd.read_csv(os.path.join(args.results_directory, n, 'fold_' + str(f), 'plot_points', args.results_directory + "_"+n+"_"+'fold_' + str(f) + '_' + c + ".csv"))
+            temp = pd.read_csv(os.path.join(args.results_directory, n, 'fold_' + str(f), 'plot_points', args.file_prefix + "_"+n+"_"+'fold_' + str(f) + '_' + c + ".csv"))
             temp.columns = plotting_colnames
             temp['chems'] = c
             temp['leaftype'] = n
@@ -83,7 +84,7 @@ for f in range(args.folds):
         ax.set(xlim=[low_val, high_val], ylim=[low_val, high_val], title=i_title, xlabel='Measured', ylabel='Modeled')
         ax.text(low_val, high_val, 'R2: ' + round(r_sq, 2).astype('str') + '   nRMSE: '+ round(nrmse, 2).astype('str'), horizontalalignment='left', verticalalignment='top')
 
-    plt.savefig(os.path.join(os.path.join(args.results_directory, args.results_directory + '_fold_'+ str(f) + '_model_results.png')), **figure_export_settings)
+    plt.savefig(os.path.join(os.path.join(args.results_directory, args.file_prefix + '_fold_'+ str(f) + '_model_results.png')), **figure_export_settings)
     del fig
 
 # In[14]:
