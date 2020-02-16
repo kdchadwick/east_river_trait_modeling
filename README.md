@@ -16,9 +16,6 @@ https://github.com/pgbrodrick/acorn_atmospheric_correction
 ### Shade ray tracing: 
 https://github.com/pgbrodrick/shade-ray-trace
 
-### Data Extraction:
-https://github.com/pgbrodrick/bil_data_extraction
-
 ### Conifer Modeling:
 https://github.com/pgbrodrick/conifer_modeling
 
