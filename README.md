@@ -11,6 +11,10 @@ A full description of the effort can be found at:
 
 and use of this code should cite that manuscript.
 
+### Generated datasets can be found here: 
+https://code.earthengine.google.com/?asset=users/kdc/ER_NEON
+
+
 ## Additional relevant repositories:
 
 ### Atmospheric correction wrapper: 
