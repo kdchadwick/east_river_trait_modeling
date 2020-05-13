@@ -11,9 +11,13 @@ A full description of the effort can be found at:
 
 and use of this code should cite that manuscript.
 
-### Generated datasets can be found here: 
-https://code.earthengine.google.com/?asset=users/kdc/ER_NEON
+### Visualization code in GEE for all products in this project can be found here: 
+https://code.earthengine.google.com/5c96bbc96ffd50e3c8b1433b34a0bb86
+<br>
 
+### Generated datasets are available as assets on GEE: 
+https://code.earthengine.google.com/?asset=users/kdc/ER_NEON
+<br> <br>
 
 ## Additional relevant repositories:
 
