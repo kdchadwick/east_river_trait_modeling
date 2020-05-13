@@ -16,8 +16,12 @@ https://code.earthengine.google.com/5c96bbc96ffd50e3c8b1433b34a0bb86
 <br>
 
 ### Generated datasets are available as assets on GEE: 
-https://code.earthengine.google.com/?asset=users/kdc/ER_NEON
-<br> <br>
+https://code.earthengine.google.com/?asset=users/kdc/ER_NEON <br>
+<br> 
+and are part of the data package: 
+> Chadwick K D ; Brodrick P ; Grant K ; Henderson A ; Bill M ; Breckheimer I ; Williams C F R ; Goulden T ; Falco N ; McCormick M ; Musinsky J ; Pierce S ; Hastings Porro M ; Scott A ; Brodie E ; Hancher M ; Steltzer H ; Wainwright H ; Maher K W; undefined K M (2020): NEON AOP foliar trait maps, maps of model uncertainty estimates, and conifer map. A Multiscale Approach to Modeling Carbon and Nitrogen Cycling within a High Elevation Watershed. DOI: 10.15485/1618133
+<br>
+<br>
 
 ## Additional relevant repositories:
 
