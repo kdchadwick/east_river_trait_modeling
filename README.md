@@ -1,8 +1,9 @@
-#Trait model application overview 
+# Trait model application overview 
 
-This repository handles the management and merging of NEON AOP remote sensing data with field/lab-based trait data.
+
+<p>This repository handles the management and merging of NEON AOP remote sensing data with field/lab-based trait data.
 The code leverages a plsr ensembling routine (external to this repository) to create trait models and assess the
-model performance. This code was created as part of an effort to generate foliar trait maps throughout the Department of Energy (DOE) Watershed Function Scientific Focus Area (WF-SFA) site in Crested Butte, CO in association with NEON's Assignable Asset program.
+model performance. This code was created as part of an effort to generate foliar trait maps throughout the Department of Energy (DOE) Watershed Function Scientific Focus Area (WF-SFA) site in Crested Butte, CO in association with NEON's Assignable Asset program.</p><br>
 
 A full description of the effort can be found at:
 
