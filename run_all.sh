@@ -10,4 +10,4 @@ python extract_aop_data_from_mosaics.py data/crown_raster.tif  data/site_spectra
 python merge_data_run_iterative_plsr.py PLSR/test CRBU_settings.txt -shade_type dsm 
 
 # run plotting code to create final output plots
-python Plotting_PLSR_Results.py -folds 10 -results_directory PLSR/test
+python plot_10fold_plsr_results.py -folds 10 -results_directory PLSR/test
