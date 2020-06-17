@@ -33,7 +33,7 @@ args = parser.parse_args()
 
 
 chems = ['N_weight_percent', 'LMA_gm2', 'LWC_per',  'CN', 'C_weight_percent', 'd13C']
-chems_names = ['Foliar N (%)', 'Leaf Mass per Area', 'Leaf Water (%)','Foliar C:N Ratio','Foliar C (%)','d13C']
+chems_names = ['Foliar N (%)', 'Leaf Mass per Area (g m$^2$)', 'Leaf Water (%)','Foliar C:N Ratio','Foliar C (%)','$\delta$$^{13}$C']
 leaftype = ['needles','noneedles']
 plotting_colnames = ['SiteID', 'measured', 'modeled', 'calval']
 
