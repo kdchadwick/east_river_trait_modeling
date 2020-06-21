@@ -63,9 +63,9 @@ def main():
         i = chems[_i]
         i_title = chems_names[_i]
 
-        x = chems_results.loc[(chems_results['calval'] == "Validation") & (
-            chems_results['chems'] == i), "measured"].to_numpy().reshape(-1, 1)
         y = chems_results.loc[(chems_results['calval'] == "Validation") & (
+            chems_results['chems'] == i), "measured"].to_numpy().reshape(-1, 1)
+        x = chems_results.loc[(chems_results['calval'] == "Validation") & (
             chems_results['chems'] == i), "modeled"].to_numpy().reshape(-1, 1)
         fit_model = LinearRegression()
         fit_model.fit(x, y)
@@ -73,12 +73,42 @@ def main():
         slope = fit_model.coef_
         intercept = fit_model.intercept_
 
+        y_n = chems_results.loc[(chems_results['calval'] == "Validation") & (
+                chems_results['chems'] == i) & (chems_results['leaftype'] == "needles"), "measured"].to_numpy().reshape(-1, 1)
+        x_n = chems_results.loc[(chems_results['calval'] == "Validation") & (
+                chems_results['chems'] == i) & (chems_results['leaftype'] == "needles"), "modeled"].to_numpy().reshape(-1, 1)
+        fit_model_n = LinearRegression()
+        fit_model_n.fit(x_n, y_n)
+        r_sq_n = fit_model_n.score(x_n, y_n)
+        slope_n = fit_model_n.coef_
+        intercept_n = fit_model_n.intercept_
+
+        y_nn = chems_results.loc[(chems_results['calval'] == "Validation") & (
+                chems_results['chems'] == i) & (chems_results['leaftype'] == "noneedles"), "measured"].to_numpy().reshape(-1, 1)
+        x_nn = chems_results.loc[(chems_results['calval'] == "Validation") & (
+                chems_results['chems'] == i) & (chems_results['leaftype'] == "noneedles"), "modeled"].to_numpy().reshape(-1, 1)
+        fit_model_nn = LinearRegression()
+        fit_model_nn.fit(x_nn, y_nn)
+        r_sq_nn = fit_model_nn.score(x_nn, y_nn)
+        slope_nn = fit_model_nn.coef_
+        intercept_nn = fit_model_nn.intercept_
+
         high_val = ((max(max(chems_results.loc[(chems_results['chems'] == i), "measured"]), max(
             chems_results.loc[(chems_results['chems'] == i), "modeled"]))))
         low_val = ((min(min(chems_results.loc[(chems_results['chems'] == i), "measured"]), min(
             chems_results.loc[(chems_results['chems'] == i), "modeled"]))))
+        high_val_n = ((max(max(chems_results.loc[(chems_results['chems'] == i) & (chems_results['leaftype'] == "needles"), "measured"]), max(
+            chems_results.loc[(chems_results['chems'] == i) & (chems_results['leaftype'] == "needles"), "modeled"]))))
+        low_val_n = ((min(min(chems_results.loc[(chems_results['chems'] == i) & (chems_results['leaftype'] == "needles"), "measured"]), min(
+            chems_results.loc[(chems_results['chems'] == i) & (chems_results['leaftype'] == "needles"), "modeled"]))))
+        high_val_nn = ((max(max(chems_results.loc[(chems_results['chems'] == i) & (chems_results['leaftype'] == "noneedles"), "measured"]), max(
+            chems_results.loc[(chems_results['chems'] == i) & (chems_results['leaftype'] == "noneedles"), "modeled"]))))
+        low_val_nn = ((min(min(chems_results.loc[(chems_results['chems'] == i) & (chems_results['leaftype'] == "noneedles"), "measured"]), min(
+            chems_results.loc[(chems_results['chems'] == i) & (chems_results['leaftype'] == "noneedles"), "modeled"]))))
 
         nrmse = np.sqrt(np.mean(np.power(y-x, 2)))/(high_val-low_val)
+        nrmse_n = np.sqrt(np.mean(np.power(y_n-x_n, 2)))/(high_val_n-low_val_n)
+        nrmse_nn = np.sqrt(np.mean(np.power(y_nn-x_nn, 2)))/(high_val_nn-low_val_nn)
 
         high_val += (high_val-low_val)*.05
         low_val -= (high_val-low_val)*.05
@@ -89,19 +119,26 @@ def main():
         ax = plt.subplot(grid[r_i[_i], c_i[_i]])
         ax.plot([low_val, high_val], [low_val, high_val], '--k', alpha=0.5)
         ax.plot(x, intercept + slope * x, 'black', linewidth=2, label='fitted line')
+        ax.plot(x_n, intercept_n + slope_n * x_n, 'royalblue', linewidth=2, label='fitted line')
+        ax.plot(x_nn, intercept_nn + slope_nn * x_nn, 'darkorange', linewidth=2, label='fitted line')
 
         ax.scatter(chems_results.loc[(chems_results['calval'] == "Validation") & (chems_results['chems'] == i) & (chems_results['leaftype'] == 'noneedles'), "measured"], chems_results.loc[(
-            chems_results['calval'] == "Validation") & (chems_results['chems'] == i) & (chems_results['leaftype'] == 'noneedles'), "modeled"], color="darkorange", marker='o')
+            chems_results['calval'] == "Validation") & (chems_results['chems'] == i) & (chems_results['leaftype'] == 'noneedles'), "modeled"], color="darkorange",  marker='o',alpha=0.4, lw=0)
         ax.scatter(chems_results.loc[(chems_results['calval'] == "Validation") & (chems_results['chems'] == i) & (chems_results['leaftype'] == 'needles'), "measured"], chems_results.loc[(
-            chems_results['calval'] == "Validation") & (chems_results['chems'] == i) & (chems_results['leaftype'] == 'needles'), "modeled"], color="royalblue", marker='o')
+            chems_results['calval'] == "Validation") & (chems_results['chems'] == i) & (chems_results['leaftype'] == 'needles'), "modeled"], color="royalblue",  marker='o', alpha=0.4, lw=0)
 
         ax.set_xticks(ticks)
         ax.set_yticks(ticks)
         ax.set(xlim=[low_val, high_val], ylim=[low_val, high_val],
-               title=i_title, xlabel='Measured', ylabel='Modeled')
+               title=i_title, ylabel='Measured', xlabel='Modeled')
 
         ax.text(low_val + (high_val-low_val)*0.02, low_val + (high_val-low_val)*0.98, 'R$^2$: ' + round(r_sq, 2).astype(
-            'str') + '   nRMSE: ' + round(nrmse, 2).astype('str'), horizontalalignment='left', verticalalignment='top')
+            'str') + '   nRMSE: ' + round(nrmse, 2).astype('str') + '  n: '+str(len(x)), horizontalalignment='left', verticalalignment='top', fontsize=16)
+        ax.text(low_val + (high_val-low_val)*0.02, low_val + (high_val-low_val)*0.92, 'R$^2$: ' + round(r_sq_n, 2).astype(
+            'str') + '   nRMSE: ' + round(nrmse_n, 2).astype('str') + '  n: '+str(len(x_n)), horizontalalignment='left', verticalalignment='top', color='royalblue', fontsize=16)
+        ax.text(low_val + (high_val-low_val)*0.02, low_val + (high_val-low_val)*0.86, 'R$^2$: ' + round(r_sq_nn, 2).astype(
+            'str') + '   nRMSE: ' + round(nrmse_nn, 2).astype('str') + '  n: '+str(len(x_nn)), horizontalalignment='left', verticalalignment='top', color='darkorange', fontsize=16)
+
     plt.savefig(os.path.join(os.path.join(args.results_directory, args.file_prefix +
                                           '_allfolds_model_results.png')), **figure_export_settings)
     del fig
