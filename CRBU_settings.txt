@@ -4,11 +4,8 @@ version name = nn_BN
 [Data]
 csv file = /Volumes/GoogleDrive/My Drive/CB_share/NEON/site_info/extraction_chem_noneedles.csv
 band preface = refl_B_
-chems(comma separated chem list) = LMA_gm2, LWC_per, LWA_gm2, d15N
-#chems(comma separated chem list) =   LMA_gm2, LWC_per, LWA_gm2, d15N, N_weight_percent, C_weight_percent, CN, d13C
-#chems(comma separated chem list) =  N_weight_percent, C_weight_percent, CN, d13C, d15N, LMA_gm2, LWA_gm2, LWC_per
-#chems(comma separated chem list) =  N_weight_percent, C_weight_percent, N_pro, C_pro, N_area, C_area, N_areapro, C_areapro, CN, d13C, LMA_gm2, LWA_gm2, LWC_per, LMA_pro, LWA_pro, LWC_pro, PV, NPV, Bare
-chem transforms(comma separated chem transform list...options -- log, sqrt, square) = None, None, None, None
+chems(comma separated chem list) =   LMA_gm2, LWC_per, LWA_gm2, d15N, N_weight_percent, C_weight_percent, CN, d13C
+chem transforms(comma separated chem transform list...options -- log, sqrt, square) = None, None, None, None, None, None, None, None
 crown col = SampleSiteCode
 test training col = CalVal
 test set value = 0 
