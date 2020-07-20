@@ -1,3 +1,0 @@
-Information on data sources: 
-
-
