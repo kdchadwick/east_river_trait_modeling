@@ -12,11 +12,11 @@ A full description of the effort can be found at:
 and use of this code should cite that manuscript.
 
 ### Visualization code in GEE for all products in this project can be found here: 
-https://code.earthengine.google.com/5c96bbc96ffd50e3c8b1433b34a0bb86
+[https://code.earthengine.google.com/5c96bbc96ffd50e3c8b1433b34a0bb86](https://code.earthengine.google.com/5c96bbc96ffd50e3c8b1433b34a0bb86)
 <br>
 
 ### Generated datasets are available as assets on GEE: 
-[https://code.earthengine.google.com/?asset=users/kdc/ER_NEON][https://code.earthengine.google.com/?asset=users/kdc/ER_NEON] <br>
+[https://code.earthengine.google.com/?asset=users/kdc/ER_NEON](https://code.earthengine.google.com/?asset=users/kdc/ER_NEON) <br>
 <br> 
 and are part of the data package: 
 > Chadwick K D ; Brodrick P ; Grant K ; Henderson A ; Bill M ; Breckheimer I ; Williams C F R ; Goulden T ; Falco N ; McCormick M ; Musinsky J ; Pierce S ; Hastings Porro M ; Scott A ; Brodie E ; Hancher M ; Steltzer H ; Wainwright H ; Maher K W; undefined K M (2020): NEON AOP foliar trait maps, maps of model uncertainty estimates, and conifer map. A Multiscale Approach to Modeling Carbon and Nitrogen Cycling within a High Elevation Watershed. DOI: 10.15485/1618133
@@ -26,17 +26,17 @@ and are part of the data package:
 ## Additional relevant repositories:
 
 ### Atmospheric correction wrapper: 
-[https://github.com/pgbrodrick/acorn_atmospheric_correction][https://github.com/pgbrodrick/acorn_atmospheric_correction]
+[https://github.com/pgbrodrick/acorn_atmospheric_correction](https://github.com/pgbrodrick/acorn_atmospheric_correction)
 
 ### Shade ray tracing: 
-[https://github.com/pgbrodrick/shade-ray-trace][https://github.com/pgbrodrick/shade-ray-trace]
+[https://github.com/pgbrodrick/shade-ray-trace](https://github.com/pgbrodrick/shade-ray-trace)
 
 ### Conifer Modeling:
-[https://github.com/pgbrodrick/conifer_modeling][https://github.com/pgbrodrick/conifer_modeling]
+[https://github.com/pgbrodrick/conifer_modeling](https://github.com/pgbrodrick/conifer_modeling)
 
 ### Trait Model Generation:
-[https://github.com/kdchadwick/east_river_trait_modeling][https://github.com/kdchadwick/east_river_trait_modeling]
+[https://github.com/kdchadwick/east_river_trait_modeling](https://github.com/kdchadwick/east_river_trait_modeling)
 
 ### PLSR Ensembling:
-[https://github.com/pgbrodrick/ensemblePLSR][https://github.com/pgbrodrick/ensemblePLSR]
+[https://github.com/pgbrodrick/ensemblePLSR](https://github.com/pgbrodrick/ensemblePLSR)
 
