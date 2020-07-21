@@ -1,0 +1,212 @@
+<!DOCTYPE HTML>
+<!--
+	ZeroFour by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>East River Trait Modeling</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="no-sidebar">
+		<div id="page-wrapper">
+
+			<!-- Header Wrapper -->
+				<div id="header-wrapper">
+					<div class="container">
+
+						<!-- Header -->
+							<header id="header">
+								<div class="inner">
+
+									<!-- Logo -->
+										<h1><a href="https://github.com/kdchadwick/east_river_trait_modeling" id="logo">East River Foliar Trait Modeling</a></h1>
+
+									<!-- Nav -->
+										<nav id="nav">
+											<ul>
+												<li><a href="index.html"> Airborne</a>
+												  <ul>
+													<li><a href="index.html#AC">Atmospheric Correction</a>	
+													<li><a href="index.html#ShadeMasks">Shade Masks</a>
+												  </ul>
+												</li>
+												
+												<li><a href="index.html#field">Field Data</a></li>
+												<li><a href="index.html">Model Generation</a>
+												<ul>
+													<li><a href="https://github.com/kdchadwick/east_river_trait_modeling">Trait Models</a>	
+													<li><a href="index.html#ConiferMaps">Conifer Maps</a>
+												  </ul>
+												</li>
+											</ul>
+										</nav>
+
+								</div>
+							</header>
+
+					</div>
+				</div>
+
+			<!-- Main Wrapper -->
+				<div id="main-wrapper">
+					<div class="wrapper style2">
+						<div class="inner">
+							<div class="container">
+								<div id="content">
+
+									<!-- Content -->
+
+										<article>
+											<header class="major">
+											  <h2>Foliar trait model application overview </h2>
+											  <p>Detailing code and datasets used in mapping foliar traits from 2018 NEON AOP survey over Crested Butte, CO.</p>
+											</header>
+
+											
+											<p>This project contains a repository that handles the management and merging of <a href="https://www.neonscience.org/data-collection/airborne-remote-sensing">NEON AOP</a> remote sensing data with field/lab-based trait data to develop PLSR models, as used for trait mapping that was conducted in the East River, CO from data collected in June, 2018. The code leverages a plsr ensembling routine (external to this repository) to create trait models and assess the model performance. This code was created as part of an effort to generate foliar trait maps throughout the Upper East River watersheds, home to the <a href="https://www.rmbl.org/">Rocky Mountian Biological Laboratory</a> and DOE's <a href="https://watershed.lbl.gov/">Watershed Function Scientific Focus Area</a> site in Crested Butte, CO in association with <a href="https://www.neonscience.org/assignable-assets/airborne-observation-platform">NEON's Assignable Asset program</a>. Here we document this repository, associated code repositories required for AOP data processing, and sources for both AOP and field based data used in this study. </p>
+											<span class="image featured"><img src="images/maps.png" alt="" /></span>
+											<p>A full description of this study can be found in the following publication, and use of this code should cite this manuscript:</p>
+											<blockquote>K. Dana Chadwick, Philip Brodrick, Kathleen Grant, Tristan Goulden, Amanda Henderson, Nicola Falco, Haruko Wainwright, Kenneth H. Williams, Markus Bill, Ian Breckheimer, Eoin L. Brodie, Heidi Steltzer, C. F. Rick Williams, Benjamin Blonder, Jiancong Chen, Baptiste Dafflon, Joan Damerow, Matt Hancher, Aizah Khurram, Jack Lamb, Corey Lawrence, Maeve McCormick. John Musinsky, Samuel Pierce, Alexander Polussa, Maceo Hastings Porro, Andea Scott, Hans Wu Singh, Patrick O. Sorensen, Charuleka Varadharajan, Bizuayehu Whitney, Katharine Maher. Integrating airborne remote sensing and field campaigns for ecology and Earth system science. Methods in Ecology and Evolution, In Press.</blockquote><br>
+											The code in <a href="https://github.com/kdchadwick/east_river_trait_modeling">this repository</a> was used merge, subset, and organize data for application of PLSR ensemble code, as well as plot and assess model quality. It also includes code to apply PLSR equations to reflectance datasets. <br>
+											<a href="https://zenodo.org/badge/latestdoi/224903436"><img src="https://zenodo.org/badge/224903436.svg" alt="DOI"></a>
+										</article>
+										
+									<hr>
+									<section class="box article-list">
+											  <h3 class="">Trait Map Availability</h3>
+											  <!-- Excerpt -->
+													
+													<article class="box excerpt"> <a class="image left"></a>
+													  <div>
+													    
+													    <p>All trait maps that were generated as part of this project are available as assets in <a href="https://code.earthengine.google.com/?asset=users/kdc/ER_NEON_TraitMaps">Earth Engine</a>. There is also code for visualizing, mosaicing, and downloading subsets of these data avaliable <a href="https://code.earthengine.google.com/?scriptPath=users%2Fpgbrodrick%2Feast_river%3Aneon_aop_collection_visuals">here</a>. In addition, these data are archived on <a href="">ESS-DIVE</a> with additional documentation. When using these data, please cite them:</p> 
+														  <br>
+														  <blockquote>Chadwick, K. D., Brodrick, P. G., Grant, K., Henderson, A. N., Bill, M., Breckheimer, I., … Maher, K. (2020). NEON AOP foliar trait maps, maps of model uncertainty estimates, and conifer map. A Multiscale Approach to Modeling Carbon and Nitrogen Cycling within a High Elevation Watershed. doi:10.15485/1618133</blockquote>
+														  <br>
+														<p>Please visit our documentation below for links to airborne and field datasets and additional access information. All data and codes assocaited with this project are publicaly availiable. If you need assistance in accessing these data, <a href=index.html#Contact>please get in touch</a>.</p>
+													  </div>
+											  </article>
+									</section>
+									
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="wrapper style3">
+						<div class="inner">
+							<div class="container">
+								<div class="row">
+									<div class="col-12-medium">
+
+										<!-- Article list -->
+											<section class="box article-list">
+											  <!-- Excerpt -->
+													
+													
+												<article class="box excerpt"> 
+				  									<div>
+													    <header> 
+													      <h2><a href="">Associated Repositories</a></h2>
+												        </header>
+													    <p>We discuss the application of these repositories in the associated manuscript, but list them here for easy reference. These repositories are maintained by <a href="https://www.philbrodrick.com/">Phil Brodrick</a>, Research Technologist at the Jet Propulsion Laboratory  <br><br>
+															<a name = "AC" href="https://github.com/pgbrodrick/acorn_atmospheric_correction"><b>Atmospheric Correction Wrapper</b></a>:
+														Contains code to run ACORN on kernels of a flightline to utilize localized observational input information as well as to estimate visibility.</p>
+															<br>
+															<p><a name="ShadeMasks" href="https://github.com/pgbrodrick/shade-ray-trace"><b>Shade Ray Tracing</b></a>: Contains code to perform a ray trace between the ground, sun, and sensor in order to determine if there was any intercept to induce shading.  Can utilize either a digital surface model or a combination of a digital elevation model and a tree canopy height map. </p>
+															<br>
+															<p><a name="ConiferMaps" href="https://github.com/pgbrodrick/conifer_modeling"><b>Conifer Model</b></a>: Code to train and apply a deep learning conifer model from VSWIR data.</p>
+															<br>
+															<p><a href="https://github.com/pgbrodrick/ensemblePLSR"><b>PLSR Ensembling</b></a>: Code utilized for PLSR ensembling, previously published (Martin et al., 2018)</p>
+															<br>
+														</p>
+												      </div>
+											  </article>
+													<article class="box excerpt"> 
+													  <div>
+													    <header> 
+													      <h2><a href="">Associated Data Packages</a></h2>
+												        </header>
+														  <header> 
+													      <h3><a href="">Remote Sensing Data</a></h3>
+												        </header>
+													    <p>There are several different remote sensing data packages that were used in this work. They are described in greater detail in the associated manuscript, but they are listed and linked to here for easy reference: </p><br>
+														  <a href="">AOP Radiance and Observational Data</a><br>
+														  <a href="https://data.ess-dive.lbl.gov/view/doi:10.15485/1617203">AOP LiDAR Point Cloud and Raster Elevation Data</a><br>
+														  <a href="">Custom Processed AOP Reflectance Data, Shade Masks, and Canopy Water Content</a><br>
+														  <br>
+														  <header> 
+													      <h3><a name="field" href="">Field Data</a></h3>
+												        </header>
+														  <p>There are several different field data packages used in this work. They are described in greater detail in the associated manuscript, but they are listed and linked to here for easy reference: </p><br>
+														  <a href="https://data.ess-dive.lbl.gov/view/doi:10.15485/1618130">Site Description and Species Cover</a><br>
+														  <a href="https://data.ess-dive.lbl.gov/view/doi:10.15485/1631278">Foliar Carbon, Nitrogen, and d13C</a><br>
+														  <a href="https://data.ess-dive.lbl.gov/view/doi:10.15485/1618132">Leaf Mass per Area and Water Content</a><br>
+												      </div>
+											  </article>
+											 
+<!-- Excerpt -->
+												<!-- Excerpt -->
+											</section>
+									</div>
+									
+							  </div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			<!-- Footer Wrapper -->
+				<div id="footer-wrapper">
+					<footer id="footer" class="container">
+						<div class="row">
+							
+<div >
+
+			<!-- Contact -->
+				<section>
+										<h2><a href="https://github.com/kdchadwick/east_river_trait_modeling">east_river_trait_modeling</a> is maintained on GitHub by <a href="https://github.com/kdchadwick">kdchadwick</a></h2> <a name="Contact"></a>
+										<div>
+											<div class="row">
+												<div class="col-12-small">
+													<dl class="contact">
+														<dt >WWW</dt>
+														<dd><a href="kdchadwick.github.io">kdchadwick.github.io</a></dd>
+														<dt> Email</dt>
+														<dd><a href="mailto: kdc@stanford.edu">kdc@stanford.edu</a></dd>
+														
+													</dl>
+												</div>
+												
+											</div>
+										</div>
+									</section>
+							</div>
+							<div class="col-12">
+								<div id="copyright">
+									<ul class="menu">
+										<li>Author: K. Dana Chadwick</li>
+										<li>Design modified from the <strong>ZeroFour</strong> template by <a href="http://twitter.com/ajlkn">AJ for </a> <a href="http://html5up.net">HTML5 UP</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</footer>
+				</div>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
