@@ -83,7 +83,7 @@
 													<article class="box excerpt"> <a class="image left"></a>
 													  <div>
 													    
-													    <p>All trait maps that were generated as part of this project are available as assets in <a href="https://code.earthengine.google.com/?asset=users/kdc/ER_NEON_TraitMaps">Earth Engine</a>. There is also code for visualizing, mosaicing, and downloading subsets of these data avaliable <a href="https://code.earthengine.google.com/?scriptPath=users%2Fpgbrodrick%2Feast_river%3Aneon_aop_collection_visuals">here</a>. In addition, these data are archived on <a href="">ESS-DIVE</a> with additional documentation. When using these data, please cite them:</p> 
+													    <p>All trait maps that were generated as part of this project are available as assets in <a href="https://code.earthengine.google.com/?asset=users/kdc/ER_NEON_TraitMaps">Earth Engine</a>. There is also code for visualizing, mosaicing, and downloading subsets of these data avaliable <a href="https://code.earthengine.google.com/?scriptPath=users%2Fpgbrodrick%2Feast_river%3Aneon_aop_collection_visuals">here</a>. In addition, these data are available for download and are archived on <a href="https://data.ess-dive.lbl.gov/view/doi:10.15485/1618133">ESS-DIVE</a> with additional documentation. When using these data, please cite them:</p> 
 														  <br>
 														  <blockquote>Chadwick, K. D., Brodrick, P. G., Grant, K., Henderson, A. N., Bill, M., Breckheimer, I., … Maher, K. (2020). NEON AOP foliar trait maps, maps of model uncertainty estimates, and conifer map. A Multiscale Approach to Modeling Carbon and Nitrogen Cycling within a High Elevation Watershed. doi:10.15485/1618133</blockquote>
 														  <br>
@@ -114,14 +114,14 @@
 													      <h2><a href="">Associated Repositories</a></h2>
 												        </header>
 													    <p>We discuss the application of these repositories in the associated manuscript, but list them here for easy reference. These repositories are maintained by <a href="https://www.philbrodrick.com/">Phil Brodrick</a>, Research Technologist at the Jet Propulsion Laboratory  <br><br>
-															<a name = "AC" href="https://github.com/pgbrodrick/acorn_atmospheric_correction"><b>Atmospheric Correction Wrapper</b></a>:
+															<p style="margin-left: 50px"><a name = "AC" href="https://github.com/pgbrodrick/acorn_atmospheric_correction"><b>Atmospheric Correction Wrapper</b></a>:
 														Contains code to run ACORN on kernels of a flightline to utilize localized observational input information as well as to estimate visibility.</p>
 															<br>
-															<p><a name="ShadeMasks" href="https://github.com/pgbrodrick/shade-ray-trace"><b>Shade Ray Tracing</b></a>: Contains code to perform a ray trace between the ground, sun, and sensor in order to determine if there was any intercept to induce shading.  Can utilize either a digital surface model or a combination of a digital elevation model and a tree canopy height map. </p>
+															<p style="margin-left: 50px"><a name="ShadeMasks" href="https://github.com/pgbrodrick/shade-ray-trace"><b>Shade Ray Tracing</b></a>: Contains code to perform a ray trace between the ground, sun, and sensor in order to determine if there was any intercept to induce shading.  Can utilize either a digital surface model or a combination of a digital elevation model and a tree canopy height map. </p>
 															<br>
-															<p><a name="ConiferMaps" href="https://github.com/pgbrodrick/conifer_modeling"><b>Conifer Model</b></a>: Code to train and apply a deep learning conifer model from VSWIR data.</p>
+															<p style="margin-left: 50px"><a name="ConiferMaps" href="https://github.com/pgbrodrick/conifer_modeling"><b>Conifer Model</b></a>: Code to train and apply a deep learning conifer model from VSWIR data.</p>
 															<br>
-															<p><a href="https://github.com/pgbrodrick/ensemblePLSR"><b>PLSR Ensembling</b></a>: Code utilized for PLSR ensembling, previously published (Martin et al., 2018)</p>
+															<p style="margin-left: 50px"><a href="https://github.com/pgbrodrick/ensemblePLSR"><b>PLSR Ensembling</b></a>: Code utilized for PLSR ensembling, previously published (Martin et al., 2018)</p>
 															<br>
 														</p>
 												      </div>
@@ -135,21 +135,41 @@
 													      <h3><a href="">Remote Sensing Data</a></h3>
 												        </header>
 													    <p>There are several different remote sensing data packages that were used in this work. They are described in greater detail in the associated manuscript, but they are listed and linked to here for easy reference: </p><br>
-														  <a href="">AOP Radiance and Observational Data</a><br>
-														  <a href="https://data.ess-dive.lbl.gov/view/doi:10.15485/1617203">AOP LiDAR Point Cloud and Raster Elevation Data</a><br>
-														  <a href="">Custom Processed AOP Reflectance Data, Shade Masks, and Canopy Water Content</a><br>
-														  <br>
+														<table style="width:80%;margin-left:50px;margin-right:auto">
+															<tr>
+															   <td style="width:300px"><b>Radiance & Observational Data</b></td>
+															   <td><a href="https://data.ess-dive.lbl.gov/view/doi:10.15485/1617204">doi</a><br> 
+																<a href="https://data.ess-dive.lbl.gov/view/doi:/10.15485/1617202 ">Documentation</a></td><br>
+															</tr>
+															<tr><td><br>  </td></tr>
+															<tr><td style="width:300px"><b>LiDAR Point Cloud & Rasters</b></td>
+															<td><a href="https://data.ess-dive.lbl.gov/view/doi:10.15485/1617203">doi</a> <br> 
+																<a href="">Digital Terrain Model GEE Asset</a> <br>
+																<a href="">Digital Surface Model GEE Asset</a><br> 
+																<a href="">Tree Canopy Height GEE Asset</a></td>
+															</tr>
+															<tr><td><br></td></tr>
+															<tr><td style="width:300px"><b>Custom Processed Reflectance Data, Shade Masks, & Canopy Water Content</b></td>
+															<td><a href="https://data.ess-dive.lbl.gov/view/doi:10.15485/1618131">doi</a> <br> 
+																<a href="https://code.earthengine.google.com/?asset=users/pgbrodrick/SFA/collections/ciacorn_priority">Reflectance Data GEE Asset</a> <br>
+																Shade Masks: <a href="https://code.earthengine.google.com/?asset=users/pgbrodrick/SFA/collections/shade_priority">DSM GEE Asset</a>, <a href="https://code.earthengine.google.com/?asset=users/pgbrodrick/SFA/collections/shade_tch_priority">DTM + TCH GEE Asset</a><br> 
+																<a href="https://code.earthengine.google.com/?asset=users/pgbrodrick/SFA/collections/wtrl_priority">Canopy Water Content GEE Asset</a><br>
+																<a href="https://code.earthengine.google.com/?asset=users/pgbrodrick/SFA/collections/wtrv_priority">Atmospheric Water Vapor GEE Asset</a><br>
+																<a href="https://code.earthengine.google.com/?asset=users/pgbrodrick/SFA/collections/obs_priority">Observational Data GEE Asset</a></td><br>
+															</tr>
+														</table>
+<br>
 														  <header> 
 													      <h3><a name="field" href="">Field Data</a></h3>
 												        </header>
 														  <p>There are several different field data packages used in this work. They are described in greater detail in the associated manuscript, but they are listed and linked to here for easy reference: </p><br>
-														  <a href="https://data.ess-dive.lbl.gov/view/doi:10.15485/1618130">Site Description and Species Cover</a><br>
+														  <p style="margin-left: 50px"> <a href="https://data.ess-dive.lbl.gov/view/doi:10.15485/1618130">Site Description and Species Cover</a><br>
 														  <a href="https://data.ess-dive.lbl.gov/view/doi:10.15485/1631278">Foliar Carbon, Nitrogen, and d13C</a><br>
 														  <a href="https://data.ess-dive.lbl.gov/view/doi:10.15485/1618132">Leaf Mass per Area and Water Content</a><br>
+														</p>
 												      </div>
 											  </article>
 											 
-<!-- Excerpt -->
 												<!-- Excerpt -->
 											</section>
 									</div>
