@@ -69,15 +69,15 @@ def plot_coeffs(df, wv_file='data/neon_wavelengths.txt'):
             if (m=='am_atcor'):
                 scale_factor = 0.01
             elif (m=='am_acorn'):
-                scale_factor = 10.
+                scale_factor = 100.
             else:
                 scale_factor = 100.
             
-            ax.plot(wv, np.nanmean(coeffs, axis=0) / scale_factor, c=color_sets[_m], linewidth=1)
+            ax.plot(wv, np.nanmean(coeffs, axis=0) / scale_factor, c=color_sets[_m], linewidth=1, label=m)
             ax.fill_between(wv, np.nanmean(coeffs, axis=0) / scale_factor - np.nanstd(coeffs, axis=0) / scale_factor, np.nanmean(
                 coeffs, axis=0) / scale_factor + np.nanstd(coeffs, axis=0) / scale_factor, alpha=.35, facecolor=color_sets[_m])
 
-        if (_c==0): ax.legend(df.atm_model.unique())
+        if (_c==0): ax.legend()
         ax.set_ylabel('Coefficients')
         ax.set_title(c)
 
