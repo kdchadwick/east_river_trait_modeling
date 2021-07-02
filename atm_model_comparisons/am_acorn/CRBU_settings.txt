@@ -1,8 +1,8 @@
 [General]
-version name = nn_BN
+version name = 
 
 [Data]
-csv file = /Volumes/GoogleDrive/My Drive/CB_share/NEON/site_info/extraction_chem_noneedles.csv
+csv file = 
 band preface = refl_B_
 chems(comma separated chem list) =   LMA_gm2, LWC_per, LWA_gm2, d15N, N_weight_percent, C_weight_percent, CN, d13C
 chem transforms(comma separated chem transform list...options -- log, sqrt, square) = None, None, None, None, None, None, None, None
