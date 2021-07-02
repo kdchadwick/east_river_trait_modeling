@@ -23,7 +23,6 @@ def main():
     parser.add_argument('-spectra_file', default='data/spectra/20200214_CRBU2018_AOP_Crowns_extraction.csv')
     parser.add_argument('-bn', '--brightness_normalize', type=str, default='True')
     parser.add_argument('-sn', '--spectrally_normalize', type=str, default='False')
-    parser.add_argument('-pw_scaling', type=bool, default=False)
     parser.add_argument('-spectral_smoothing',
                         choices=['sg', 'none', '2band', '3band'], type=str, default='none')
     parser.add_argument('-n_test_folds', default=10, type=int)
@@ -269,6 +268,9 @@ def main():
 
             bn_norm_str = 'False'
             settings_file.settings_obj['Spectral']['brightness normalize'] = bn_norm_str
+            
+            pw_norm_str = 'False'
+            settings_file.settings_obj['Spectral']['pixel-wise scaling'] = pw_norm_str
 
             settings_file.settings_obj['Data']['csv file'] = os.path.join(
                 os.getcwd(), output_df_set)
