@@ -22,6 +22,7 @@ def main():
     parser.add_argument('-chem_file', default='data/site_trait_data.csv')
     parser.add_argument('-spectra_file', default='data/spectra/20200214_CRBU2018_AOP_Crowns_extraction.csv')
     parser.add_argument('-bn', '--brightness_normalize', type=str, default='True')
+    parser.add_argument('-sn', '--spectrally_normalize', type=str, default='False')
     parser.add_argument('-pw_scaling', type=bool, default=False)
     parser.add_argument('-spectral_smoothing',
                         choices=['sg', 'none', '2band', '3band'], type=str, default='none')
@@ -38,6 +39,11 @@ def main():
         args.brightness_normalize = True
     else:
         args.brightness_normalize = False
+        
+    if args.spectrally_normalize.lower() == 'true':
+        args.spectrally_normalize = True
+    else:
+        args.spectrally_normalize = False
 
     assert args.n_folds_to_run <= args.n_test_folds, 'n_folds_to_run <= n_test_folds'
 
@@ -188,6 +194,13 @@ def main():
             spectra = spectra_sets[_s]
             spectra = spectra / np.sqrt(np.nanmean(np.power(spectra, 2), axis=1))[:, np.newaxis]
             spectra_sets[_s] = spectra
+            
+    if args.spectrally_normalize:
+        for _s in range(len(spectra_sets)):
+            spectra = spectra_sets[_s]
+            spectra -= np.nanmean(spectra, axis=1)
+            spectra /= np.nanstd(spectra, axis=1)
+            spectra_sets[_s] = spectra
 
     ############### Rebuild dataframes for export  ##############
     export_dataframes = [conifers.copy(), noneedles.copy()]
@@ -222,18 +235,16 @@ def main():
     fig = plt.figure(figsize=(8, 5), constrained_layout=True)
     for _s in range(len(spectra_sets)):
         spectra = spectra_sets[_s]
-        if (args.brightness_normalize):
-            scale_factor = 1.
-        else:
-            scale_factor = 100.
-        plt.plot(wv, np.nanmean(spectra, axis=0) / scale_factor, c=color_sets[_s], linewidth=2)
-        plt.fill_between(wv, np.nanmean(spectra, axis=0) / scale_factor - np.nanstd(spectra, axis=0) / scale_factor, np.nanmean(
-            spectra, axis=0) / scale_factor + np.nanstd(spectra, axis=0) / scale_factor, alpha=.35, facecolor=color_sets[_s])
+        plt.plot(wv, np.nanmean(spectra, axis=0), c=color_sets[_s], linewidth=2)
+        plt.fill_between(wv, np.nanmean(spectra, axis=0)  - np.nanstd(spectra, axis=0) , np.nanmean(
+            spectra, axis=0) + np.nanstd(spectra, axis=0), alpha=.35, facecolor=color_sets[_s])
 
     plt.legend(['Needle', 'Non-Needle'])
     plt.ylabel('Reflectance (%)')
     if args.brightness_normalize:
         plt.ylabel('Brightness Norm. Reflectance')
+    elif args.spectrally_normalize:
+        plt.ylabel('Spectrally Norm. Reflectance')
     else:
         plt.ylabel('Reflectance (%)')
     plt.xlabel('Wavelength (nm)')
