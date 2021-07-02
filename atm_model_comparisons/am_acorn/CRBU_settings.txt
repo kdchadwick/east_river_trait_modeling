@@ -1,0 +1,40 @@
+[General]
+version name = nn_BN
+
+[Data]
+csv file = /Volumes/GoogleDrive/My Drive/CB_share/NEON/site_info/extraction_chem_noneedles.csv
+band preface = refl_B_
+chems(comma separated chem list) =   LMA_gm2, LWC_per, LWA_gm2, d15N, N_weight_percent, C_weight_percent, CN, d13C
+chem transforms(comma separated chem transform list...options -- log, sqrt, square) = None, None, None, None, None, None, None, None
+crown col = SampleSiteCode
+test training col = CalVal
+test set value = 0 
+
+
+[Spectral]
+bad bands(1-based) = 1,   2,   3,   4,   5,   6,   7,   8,   9,  10, 195, 196, 197, 198, 199, 200, 201, 202, 203, 287, 288, 289, 290, 291, 292, 293, 294, 295, 296, 297, 298, 299, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 323, 420, 421, 422, 423, 424, 425, 426
+ignore columns(any other columns to remove) = Site_Veg
+brightness normalize = True
+ndvi maximum = -1
+brightness maximum (-1 for none)= -1 
+brightness minimum (-1 for none)= -1
+ndvi minimum (-1 for none)= 0.5
+ndvi bands (1-based)= 54,96
+max band = 426
+lowest wavelength(nm) = 383 
+wavelength interval(nm) = 5
+
+
+
+[Algorithm]
+iterations = 100
+iteration fraction used (picks this fraction of the best iterations to ultimately use) = 0.25
+samples per crown (-1 to use all) = 5
+min pixel per crown = 1
+max components = 13
+find bad bands = False
+scale response = False
+scale features = False
+test set holdout fraction = 0 
+iteration holdout fraction = 0.20
+
