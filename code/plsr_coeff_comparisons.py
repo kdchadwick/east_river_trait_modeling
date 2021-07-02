@@ -59,10 +59,13 @@ def plot_coeffs(df, wv_file='data/neon_wavelengths.txt'):
     color_sets = ['royalblue', 'black', 'forestgreen']
     figure_base_dir = os.path.join('atm_model_comparisons', 'figs')
     figure_export_settings = {'dpi': 200, 'bbox_inches': 'tight'}
-    fig = plt.figure(figsize=(16, 45))
-    grid = gridspec.GridSpec(len(df.Chem.unique()), 1, wspace=.3, hspace=.5)
+    fig = plt.figure(figsize=(25, 25))
+    grid = gridspec.GridSpec(int(len(df.Chem.unique())/2), 2, wspace=.3, hspace=.5)
     for _c, c in enumerate(df.Chem.unique()):
-        ax = plt.subplot(grid[_c, 0])
+        if(_c<4):
+            ax = plt.subplot(grid[_c, 0])
+        else:
+            ax = plt.subplot(grid[int(_c-4),1])
         # Plot the difference between needles and noneedles in reflectance data
         for _m, m in enumerate(df.atm_model.unique()):
             coeffs = df.loc[(df.atm_model == m) & (df.Chem==c), df.columns.str.startswith('B')]

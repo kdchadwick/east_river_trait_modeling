@@ -22,6 +22,7 @@ def main():
     parser.add_argument('-chem_file', default='data/site_trait_data.csv')
     parser.add_argument('-spectra_file', default='data/spectra/20200214_CRBU2018_AOP_Crowns_extraction.csv')
     parser.add_argument('-bn', '--brightness_normalize', type=str, default='True')
+    parser.add_argument('-pw_scaling', type=bool, default=False)
     parser.add_argument('-spectral_smoothing',
                         choices=['sg', 'none', '2band', '3band'], type=str, default='none')
     parser.add_argument('-n_test_folds', default=10, type=int)
@@ -30,7 +31,7 @@ def main():
     parser.add_argument('-ndvi_min', default=0.5, type=float)
 
     parser.add_argument('-plsr_ensemble_code_dir',
-                        default='/Users/kdchadwick/Documents/Github/crown_based_ensembling', type=str)
+                        default='/Users/kdchadwick/Github/crown_based_ensembling', type=str)
 
     args = parser.parse_args()
     if args.brightness_normalize.lower() == 'true':
