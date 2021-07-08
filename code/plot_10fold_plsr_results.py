@@ -9,6 +9,7 @@ import warnings
 import argparse
 import os
 from sklearn.linear_model import LinearRegression
+plt.switch_backend('Agg')
 
 warnings.filterwarnings('ignore')
 

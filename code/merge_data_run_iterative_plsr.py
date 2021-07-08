@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 import os
 import warnings
 warnings.filterwarnings('ignore')
+plt.switch_backend('Agg')
 
 
 def main():
@@ -197,8 +198,8 @@ def main():
     if args.spectrally_normalize:
         for _s in range(len(spectra_sets)):
             spectra = spectra_sets[_s]
-            spectra -= np.nanmean(spectra, axis=1)
-            spectra /= np.nanstd(spectra, axis=1)
+            spectra -= np.nanmean(spectra, axis=1)[:,np.newaxis]
+            spectra /= np.nanstd(spectra, axis=1)[:,np.newaxis]
             spectra_sets[_s] = spectra
 
     ############### Rebuild dataframes for export  ##############
