@@ -57,35 +57,34 @@ def import_coeffs(models, folds):
 def plot_coeffs(df, wv_file='data/neon_wavelengths.txt'):
     wv = np.genfromtxt(wv_file)
     color_sets = ['royalblue', 'black', 'forestgreen']
-    figure_base_dir = os.path.join('atm_model_comparisons', 'figs')
-    figure_export_settings = {'dpi': 200, 'bbox_inches': 'tight'}
-    fig = plt.figure(figsize=(25, 25))
-    grid = gridspec.GridSpec(int(len(df.Chem.unique())/2), 2, wspace=.3, hspace=.5)
-    for _c, c in enumerate(df.Chem.unique()):
-        if(_c<4):
-            ax = plt.subplot(grid[_c, 0])
-        else:
-            ax = plt.subplot(grid[int(_c-4),1])
-        # Plot the difference between needles and noneedles in reflectance data
-        for _m, m in enumerate(df.atm_model.unique()):
-            coeffs = df.loc[(df.atm_model == m) & (df.Chem==c), df.columns.str.startswith('B')]
-            if (m=='am_atcor'):
-                scale_factor = 0.01
-            elif (m=='am_acorn'):
-                scale_factor = 100.
+    chems = ['LMA_gm2', 'LWC_per', 'N_weight_percent', 'C_weight_percent', 'CN', 'd13C']
+    row_num = int(len(chems)/2)
+
+    for l in ['needles', 'no needles']:
+        df_lt = df.loc[df.leaf_type == l]
+        figure_base_dir = os.path.join('atm_model_comparisons', 'figs')
+        figure_export_settings = {'dpi': 200, 'bbox_inches': 'tight'}
+        fig = plt.figure(figsize=(25, 20))
+        grid = gridspec.GridSpec(row_num, 2, wspace=.3, hspace=.5)
+        for _c, c in enumerate(chems):
+            if(_c<row_num):
+                ax = plt.subplot(grid[_c, 0])
             else:
-                scale_factor = 100.
-            
-            ax.plot(wv, np.nanmean(coeffs, axis=0) / scale_factor, c=color_sets[_m], linewidth=1, label=m)
-            ax.fill_between(wv, np.nanmean(coeffs, axis=0) / scale_factor - np.nanstd(coeffs, axis=0) / scale_factor, np.nanmean(
-                coeffs, axis=0) / scale_factor + np.nanstd(coeffs, axis=0) / scale_factor, alpha=.35, facecolor=color_sets[_m])
+                ax = plt.subplot(grid[int(_c-row_num),1])
+            # Plot the difference between needles and noneedles in reflectance data
+            for _m, m in enumerate(df_lt.atm_model.unique()):
+                coeffs = df_lt.loc[(df_lt.atm_model == m) & (df_lt.Chem==c), df_lt.columns.str.startswith('B')]
+                
+                ax.plot(wv, np.nanmean(coeffs, axis=0), c=color_sets[_m], linewidth=0.5, label=m)
+                ax.fill_between(wv, np.nanmean(coeffs, axis=0) - np.nanstd(coeffs, axis=0), np.nanmean(
+                    coeffs, axis=0) + np.nanstd(coeffs, axis=0), alpha=.25, facecolor=color_sets[_m])
 
-        if (_c==0): ax.legend()
-        ax.set_ylabel('Coefficients')
-        ax.set_title(c)
+            if (_c==0): ax.legend()
+            ax.set_ylabel('Coefficients')
+            ax.set_title(c)
 
-    plt.savefig(os.path.join(figure_base_dir, 'all_coeffs.png'), **figure_export_settings)
-    del fig
+        plt.savefig(os.path.join(figure_base_dir, 'all_coeffs_'+l+'.png'), **figure_export_settings)
+        del fig
 
 
 if __name__ == "__main__":
