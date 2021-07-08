@@ -3,7 +3,7 @@ version name =
 
 [Data]
 csv file = .
-band preface = _rfl_B_
+band preface = refl_B_
 chems(comma separated chem list) =   LMA_gm2, LWC_per, LWA_gm2, d15N, N_weight_percent, C_weight_percent, CN, d13C
 chem transforms(comma separated chem transform list...options -- log, sqrt, square) = None, None, None, None, None, None, None, None
 crown col = SampleSiteCode
